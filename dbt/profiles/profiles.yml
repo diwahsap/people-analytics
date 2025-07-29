@@ -1,0 +1,12 @@
+people_analytics:
+  outputs:
+    dev:
+      type: postgres
+      host: postgres  # Use container name instead of localhost
+      user: postgres
+      password: postgres
+      port: 5432
+      dbname: people_analytics
+      schema: public
+      threads: 4
+  target: dev

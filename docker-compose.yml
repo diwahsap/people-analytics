@@ -1,0 +1,48 @@
+services:
+  postgres:
+    image: postgres:15
+    container_name: people-analytics-db
+    environment:
+      POSTGRES_USER: postgres
+      POSTGRES_PASSWORD: postgres
+      POSTGRES_DB: people_analytics
+    ports:
+      - "5432:5432"
+    volumes:
+      - postgres_data:/var/lib/postgresql/data
+    networks:
+      - people-analytics-network
+
+  dbt:
+    build:
+      context: .
+      dockerfile: docker/dbt.Dockerfile
+    container_name: people-analytics-dbt
+    volumes:
+      - ./dbt:/usr/app/dbt
+      - ./dbt/profiles:/usr/app/dbt/profiles
+    depends_on:
+      - postgres
+    networks:
+      - people-analytics-network
+
+  ml:
+    build:
+      context: .
+      dockerfile: docker/ml.Dockerfile
+    container_name: people-analytics-ml
+    volumes:
+      - ./ml:/usr/app/ml
+      - ./scripts:/usr/app/scripts
+      - ./data:/usr/app/data
+    depends_on:
+      - postgres
+    networks:
+      - people-analytics-network
+
+volumes:
+  postgres_data:
+
+networks:
+  people-analytics-network:
+    driver: bridge

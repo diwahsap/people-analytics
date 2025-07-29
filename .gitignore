@@ -1,0 +1,16 @@
+// please add common gitignore patterns here
+.venv
+__pycache__/
+*.pyc
+*.pyo
+turnover_model.pkl
+model_metrics.txt
+logs/
+dbt_packages/
+target/
+ARCHITECTURE.md
+PORTFOLIO.md
+powerbi/
+notebook/
+.user.yml
+README.md

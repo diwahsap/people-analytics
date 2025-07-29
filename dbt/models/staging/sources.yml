@@ -1,0 +1,22 @@
+version: 2
+
+sources:
+  - name: raw
+    database: people_analytics
+    schema: public
+    tables:
+      - name: employee_data
+        identifier: raw_employee_data
+        description: Raw employee data from HR system
+        
+      - name: engagement_data
+        identifier: raw_engagement_data
+        description: Employee engagement survey results
+        
+      - name: training_data
+        identifier: raw_training_data
+        description: Training and development records
+        
+      - name: recruitment_data
+        identifier: raw_recruitment_data
+        description: Recruitment and applicant tracking data
