@@ -8,9 +8,7 @@ model_metrics.txt
 logs/
 dbt_packages/
 target/
-ARCHITECTURE.md
-PORTFOLIO.md
 powerbi/
 notebook/
 .user.yml
-README.md
+.ipynbs_checkpoints/

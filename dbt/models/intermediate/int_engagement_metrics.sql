@@ -21,7 +21,7 @@ engagement_metrics as (
         engagement_score,
         satisfaction_score,
         work_life_balance_score,
-        overall_wellbeing_score,
+        overall_wellbeing_score::float,
         engagement_level,
         satisfaction_level,
         work_life_balance_level,

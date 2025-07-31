@@ -3,13 +3,18 @@
 ) }}
 
 with source as (
-    select * from {{ source('raw', 'engagement_data') }}
+    select * from {{ ref('raw_employee_engagement_survey_data') }}
 ),
 
 renamed as (
     select
         "Employee ID" as employee_id,
-        "Survey Date" as survey_date,
+        -- Convert survey date from DD-MM-YYYY format
+        case 
+            when "Survey Date" is not null and "Survey Date" != '' 
+            then to_date("Survey Date", 'DD-MM-YYYY')
+            else null 
+        end as survey_date,
         "Engagement Score" as engagement_score,
         "Satisfaction Score" as satisfaction_score,
         "Work-Life Balance Score" as work_life_balance_score
@@ -41,7 +46,7 @@ transformed as (
         end as work_life_balance_level,
         
         -- Calculate overall wellbeing score (average of all scores)
-        (engagement_score + satisfaction_score + work_life_balance_score) / 3.0 as overall_wellbeing_score
+        ((engagement_score + satisfaction_score + work_life_balance_score) / 3.0)::float as overall_wellbeing_score
     from renamed
 )
 

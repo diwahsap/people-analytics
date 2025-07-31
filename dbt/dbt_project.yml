@@ -23,3 +23,75 @@ models:
       +materialized: view
     marts:
       +materialized: table
+
+seeds:
+  people_analytics:
+    raw_employee_data:
+      +column_types:
+        EmpID: integer
+        FirstName: varchar(100)
+        LastName: varchar(100)
+        StartDate: varchar(20)
+        ExitDate: varchar(20)
+        Title: varchar(100)
+        Supervisor: varchar(100)
+        ADEmail: varchar(200)
+        BusinessUnit: varchar(50)
+        EmployeeStatus: varchar(50)
+        EmployeeType: varchar(50)
+        PayZone: varchar(20)
+        EmployeeClassificationType: varchar(50)
+        TerminationType: varchar(50)
+        TerminationDescription: text
+        DepartmentType: varchar(100)
+        Division: varchar(100)
+        DOB: varchar(20)
+        State: varchar(10)
+        JobFunctionDescription: varchar(100)
+        GenderCode: varchar(20)
+        LocationCode: integer
+        RaceDesc: varchar(50)
+        MaritalDesc: varchar(20)
+        "Performance Score": varchar(50)
+        "Current Employee Rating": integer
+    
+    raw_employee_engagement_survey_data:
+      +column_types:
+        "Employee ID": integer
+        "Survey Date": varchar(20)
+        "Engagement Score": integer
+        "Satisfaction Score": integer
+        "Work-Life Balance Score": integer
+    
+    raw_training_and_development_data:
+      +column_types:
+        "Employee ID": integer
+        "Training Date": varchar(20)
+        "Training Program Name": varchar(100)
+        "Training Type": varchar(50)
+        "Training Outcome": varchar(50)
+        Location: varchar(100)
+        Trainer: varchar(100)
+        "Training Duration(Days)": integer
+        "Training Cost": numeric
+
+    raw_recruitment_data:
+      +column_types:
+        "Applicant ID": integer
+        "Application Date": varchar(20)
+        "First Name": varchar(100)
+        "Last Name": varchar(100)
+        Gender: varchar(20)
+        "Date of Birth": varchar(20)
+        "Phone Number": varchar(255)
+        Email: varchar(200)
+        Address: varchar(200)
+        City: varchar(100)
+        State: varchar(10)
+        "Zip Code": integer
+        Country: varchar(100)
+        "Education Level": varchar(50)
+        "Years of Experience": integer
+        "Desired Salary": numeric
+        "Job Title": varchar(200)
+        Status: varchar(50)

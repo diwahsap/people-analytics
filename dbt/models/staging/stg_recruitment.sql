@@ -3,17 +3,27 @@
 ) }}
 
 with source as (
-    select * from {{ source('raw', 'recruitment_data') }}
+    select * from {{ ref('raw_recruitment_data') }}
 ),
 
 renamed as (
     select
         "Applicant ID" as applicant_id,
-        "Application Date" as application_date,
+        -- Convert application date from DD-Mon-YY format
+        case 
+            when "Application Date" is not null and "Application Date" != '' 
+            then to_date("Application Date", 'DD-Mon-YY')
+            else null 
+        end as application_date,
         "First Name" as first_name,
         "Last Name" as last_name,
         "Gender" as gender,
-        "Date of Birth" as date_of_birth,
+        -- Convert date of birth from DD-MM-YYYY format
+        case 
+            when "Date of Birth" is not null and "Date of Birth" != '' 
+            then to_date("Date of Birth", 'DD-MM-YYYY')
+            else null 
+        end as date_of_birth,
         "Phone Number" as phone,
         "Email" as email,
         "City" as city,

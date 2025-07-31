@@ -6,10 +6,6 @@ echo "Starting setup for People Analytics Portfolio Project..."
 echo "Cleaning up any existing containers..."
 docker compose down 2>/dev/null || true
 
-# Update data paths in the ingest script
-echo "Updating data paths in scripts..."
-sed -i 's|DATA_DIR = "/usr/app/data/raw"|DATA_DIR = "/usr/app/data/raw"|g' ./scripts/ingest_data.py
-
 # Start the PostgreSQL container
 echo "Starting PostgreSQL database container..."
 docker compose up -d postgres
@@ -26,20 +22,17 @@ until docker compose exec postgres pg_isready -U postgres -d people_analytics; d
 done
 echo "PostgreSQL is ready!"
 
-# Additional wait to ensure database is fully initialized
-sleep 5
-
-# Check if data files exist in the container
-echo "Checking for data files in container..."
-docker compose run --rm ml ls -la /usr/app/data/raw
-
-# Run data ingestion with network connectivity
-echo "Ingesting data into PostgreSQL..."
-docker compose run --rm ml python3 /usr/app/scripts/ingest_data.py
+# run dbt seeds to load CSV data with proper types
+echo "Running dbt seeds to load CSV data with specified data types..."
+docker compose run --rm dbt dbt seed --full-refresh --profiles-dir=/usr/app/dbt/profiles
 
 # Run dbt models
 echo "Running dbt models to transform data..."
 docker compose run --rm dbt dbt run --profiles-dir=/usr/app/dbt/profiles
+
+# Run dbt tests
+echo "Running dbt tests..."
+docker compose run --rm dbt dbt test --profiles-dir=/usr/app/dbt/profiles
 
 # Run ML prediction
 echo "Training machine learning model and generating predictions..."

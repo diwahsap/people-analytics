@@ -27,6 +27,7 @@ turnover_metrics as (
         race_ethnicity,
         marital_status,
         age,
+        tenure_days,
         tenure_years,
         tenure_bucket,
         performance_score,
@@ -34,8 +35,8 @@ turnover_metrics as (
         is_turnover,
         
         -- If employee left, add termination information
-        case when is_turnover = 1 then termination_type else 'Active' end as exit_type,
-        case when is_turnover = 1 then termination_description else null end as exit_reason
+        case when is_turnover = 'true' then termination_type else 'Active' end as exit_type,
+        case when is_turnover = 'true' then termination_description else null end as exit_reason
     from employee_metrics
 ),
 

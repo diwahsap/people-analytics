@@ -8,5 +8,5 @@ people_analytics:
       port: 5432
       dbname: people_analytics
       schema: public
-      threads: 4
+      threads: 6
   target: dev

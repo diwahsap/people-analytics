@@ -3,13 +3,18 @@
 ) }}
 
 with source as (
-    select * from {{ source('raw', 'training_data') }}
+    select * from {{ ref('raw_training_and_development_data') }}
 ),
 
 renamed as (
     select
         "Employee ID" as employee_id,
-        "Training Date" as training_date,
+        -- Convert training date from DD-Mon-YY format 
+        case 
+            when "Training Date" is not null and "Training Date" != '' 
+            then to_timestamp("Training Date", 'DD-Mon-YY')
+            else null 
+        end as training_date,
         "Training Program Name" as program_name,
         "Training Type" as training_type,
         "Training Outcome" as outcome,

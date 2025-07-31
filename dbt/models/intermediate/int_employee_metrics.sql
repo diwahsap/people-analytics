@@ -30,13 +30,14 @@ employee_metrics as (
         race_ethnicity,
         marital_status,
         age,
+        tenure_days,
         tenure_years,
         tenure_bucket,
         is_turnover,
         
         -- Additional calculated fields
-        extract(year from start_date) as hire_year,
-        extract(quarter from start_date) as hire_quarter,
+        extract(year from start_date)::integer as hire_year,
+        extract(quarter from start_date)::integer as hire_quarter,
         
         -- Performance metrics
         case 

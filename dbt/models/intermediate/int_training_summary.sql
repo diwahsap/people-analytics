@@ -30,10 +30,10 @@ training_summary as (
         count(case when training_category = 'Project Management' then 1 end) as project_management_trainings,
         
         -- Most recent training
-        max(training_date) as most_recent_training_date,
+        max(training_date)::date as most_recent_training_date,
         
         -- Days since last training
-        date_part('day', current_date - max(training_date)) as days_since_last_training
+        (date_part('day', current_date - max(training_date)))::integer as days_since_last_training
     from training
     group by 1
 )

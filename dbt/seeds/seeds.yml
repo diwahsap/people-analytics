@@ -1,0 +1,202 @@
+version: 2
+
+seeds:
+  - name: raw_employee_data
+    description: "Raw employee master data containing personal information, employment details, and performance metrics"
+    columns:
+      - name: '"EmpID"'
+        description: "Unique employee identifier"
+        tests:
+          - unique
+          - not_null
+      - name: '"FirstName"'
+        description: "Employee first name"
+        tests:
+          - not_null
+      - name: '"LastName"'
+        description: "Employee last name"
+        tests:
+          - not_null
+      - name: '"StartDate"'
+        description: "Employee start date"
+        tests:
+          - not_null
+      - name: '"ExitDate"'
+        description: "Employee exit date (null if still employed)"
+      - name: '"Title"'
+        description: "Employee job title"
+      - name: '"Supervisor"'
+        description: "Name of employee's supervisor"
+      - name: '"ADEmail"'
+        description: "Employee email address"
+      - name: '"BusinessUnit"'
+        description: "Business unit code"
+      - name: '"EmployeeStatus"'
+        description: "Current employment status (Active, Inactive, etc.)"
+      - name: '"EmployeeType"'
+        description: "Type of employment (Full-Time, Part-Time, Contract)"
+      - name: '"PayZone"'
+        description: "Pay zone classification"
+      - name: '"EmployeeClassificationType"'
+        description: "Employee classification type"
+      - name: '"TerminationType"'
+        description: "Type of termination"
+      - name: '"TerminationDescription"'
+        description: "Description of termination reason"
+      - name: '"DepartmentType"'
+        description: "Department type"
+      - name: '"Division"'
+        description: "Company division"
+      - name: '"DOB"'
+        description: "Date of birth"
+      - name: '"State"'
+        description: "State of residence"
+      - name: '"JobFunctionDescription"'
+        description: "Job function description"
+      - name: '"GenderCode"'
+        description: "Gender classification"
+      - name: '"LocationCode"'
+        description: "Location code"
+      - name: '"RaceDesc"'
+        description: "Race/ethnicity description"
+      - name: '"MaritalDesc"'
+        description: "Marital status"
+      - name: '"Performance Score"'
+        description: "Performance rating"
+      - name: '"Current Employee Rating"'
+        description: "Current employee rating (1-5 scale)"
+        tests:
+          - accepted_values:
+              values: [1, 2, 3, 4, 5]
+
+  - name: raw_employee_engagement_survey_data
+    description: "Employee engagement survey responses with satisfaction and work-life balance scores"
+    columns:
+      - name: '"Employee ID"'
+        description: "Employee identifier matching EmpID from employee_data"
+        tests:
+          - not_null
+      - name: '"Survey Date"'
+        description: "Date when survey was completed"
+        tests:
+          - not_null
+      - name: '"Engagement Score"'
+        description: "Employee engagement score (1-5 scale)"
+        tests:
+          - not_null
+          - accepted_values:
+              values: [1, 2, 3, 4, 5]
+      - name: '"Satisfaction Score"'
+        description: "Job satisfaction score (1-5 scale)"
+        tests:
+          - not_null
+          - accepted_values:
+              values: [1, 2, 3, 4, 5]
+      - name: '"Work-Life Balance Score"'
+        description: "Work-life balance score (1-5 scale)"
+        tests:
+          - not_null
+          - accepted_values:
+              values: [1, 2, 3, 4, 5]
+
+  - name: raw_training_and_development_data
+    description: "Training programs completed by employees with outcomes and costs"
+    columns:
+      - name: '"Employee ID"'
+        description: "Employee identifier matching EmpID from employee_data"
+        tests:
+          - not_null
+      - name: '"Training Date"'
+        description: "Date when training was conducted"
+        tests:
+          - not_null
+      - name: '"Training Program Name"'
+        description: "Name of the training program"
+        tests:
+          - not_null
+      - name: '"Training Type"'
+        description: "Type of training (Internal, External)"
+        tests:
+          - not_null
+          - accepted_values:
+              values: ['Internal', 'External']
+      - name: '"Training Outcome"'
+        description: "Outcome of the training"
+        tests:
+          - not_null
+          - accepted_values:
+              values: ['Completed', 'Failed', 'Passed', 'Incomplete']
+      - name: '"Location"'
+        description: "Location where training was conducted"
+      - name: '"Trainer"'
+        description: "Name of the trainer"
+      - name: '"Training Duration(Days)"'
+        description: "Duration of training in days"
+        tests:
+          - not_null
+      - name: '"Training Cost"'
+        description: "Cost of the training program"
+        tests:
+          - not_null
+
+  - name: raw_recruitment_data
+    description: "Job applicant information and recruitment pipeline data"
+    columns:
+      - name: '"Applicant ID"'
+        description: "Unique applicant identifier"
+        tests:
+          - unique
+          - not_null
+      - name: '"Application Date"'
+        description: "Date when application was submitted"
+        tests:
+          - not_null
+      - name: '"First Name"'
+        description: "Applicant first name"
+        tests:
+          - not_null
+      - name: '"Last Name"'
+        description: "Applicant last name"
+        tests:
+          - not_null
+      - name: '"Gender"'
+        description: "Applicant gender"
+        tests:
+          - accepted_values:
+              values: ['Male', 'Female', 'Other']
+      - name: '"Date of Birth"'
+        description: "Applicant date of birth"
+      - name: '"Phone Number"'
+        description: "Applicant phone number"
+      - name: '"Email"'
+        description: "Applicant email address"
+      - name: '"Address"'
+        description: "Applicant street address"
+      - name: '"City"'
+        description: "Applicant city"
+      - name: '"State"'
+        description: "Applicant state"
+      - name: '"Zip Code"'
+        description: "Applicant zip code"
+      - name: '"Country"'
+        description: "Applicant country"
+      - name: '"Education Level"'
+        description: "Highest education level achieved"
+        tests:
+          - not_null
+      - name: '"Years of Experience"'
+        description: "Years of work experience"
+        tests:
+          - not_null
+      - name: '"Desired Salary"'
+        description: "Desired salary amount"
+        tests:
+          - not_null
+      - name: '"Job Title"'
+        description: "Applied job title"
+      - name: '"Status"'
+        description: "Current application status"
+        tests:
+          - not_null
+          - accepted_values:
+              values: ['Interviewing', 'Rejected', 'In Review', 'Offered', 'Applied']
