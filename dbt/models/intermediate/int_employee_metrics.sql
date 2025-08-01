@@ -30,6 +30,7 @@ employee_metrics as (
         race_ethnicity,
         marital_status,
         age,
+        start_date,
         tenure_days,
         tenure_years,
         tenure_bucket,
