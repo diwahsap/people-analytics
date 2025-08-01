@@ -17,8 +17,8 @@ This project provides end-to-end analytics for HR data, including:
 
 - **Employee Turnover Prediction**: ML model to identify employees at risk
 - **Recruitment Analytics**: Insights into hiring efficiency and candidate sources
-- **Training Effectiveness**: Analysis of training programs and ROI
-- **Employee Engagement**: Correlation between engagement and performance
+- **Training Effectiveness**: Analysis of training programs and ROI (WIP)
+- **Employee Engagement**: Correlation between engagement and performance (WIP)
 
 ## Technical Stack
 
@@ -108,6 +108,6 @@ This solution provides valuable insights for HR teams:
 
 - Identify employees at risk of leaving (95% accuracy)
 - Optimize recruitment strategies
-- Improve training ROI
-- Enhance employee engagement and satisfaction
+- Improve training ROI (WIP)
+- Enhance employee engagement and satisfaction (WIP)
 - Support data-driven HR decision making
