@@ -2,6 +2,8 @@
 
 This project showcases a comprehensive people analytics solution that transforms HR data into actionable insights. It demonstrates skills in data engineering, analytics, and visualization to address key HR challenges.
 
+![PowerBI Dashboard Preview](powerbi/preview.png)
+
 ## Project Overview
 
 This project provides end-to-end analytics for HR data, including:
